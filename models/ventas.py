@@ -9,11 +9,26 @@ Vendedor = mysql_database.classes.vendedores
 Orden_Compra = mysql_database.classes.orden_compra
 Pago = mysql_database.classes.pagos
 
+class nueva_orden(BaseModel):
+    cliente_id: int
+    vendedor_id: int
+    fecha: datetime
+    direccion: str
+    metodo_despacho: str
+
 class orden_compra_fitro(BaseModel):
     orden_compra_id: int
     rut_cliente: int
     rut_vendedor: int
     fecha: datetime
+
+class metodo_despacho(BaseModel):
+    orden_compra_id: int
+    metodo_despacho: str
+
+class direccion_despacho(BaseModel):
+    orden_compra_id: int
+    direccion: str
 
 #------------Pedidos------------
 Pedido = mysql_database.classes.pedidos
