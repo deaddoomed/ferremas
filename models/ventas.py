@@ -2,6 +2,9 @@ from database import mysql_database
 from datetime import date, datetime, time, timedelta
 from pydantic import BaseModel
 
+Cliente = mysql_database.classes.clientes
+Vendedor = mysql_database.classes.vendedores
+
 #------------Ordenes y pagos------------
 Orden_Compra = mysql_database.classes.orden_compra
 Pago = mysql_database.classes.pagos
@@ -12,10 +15,9 @@ class orden_compra_fitro(BaseModel):
     rut_vendedor: int
     fecha: datetime
 
-Cliente = mysql_database.classes.clientes
-Vendedor = mysql_database.classes.vendedores
-
 #------------Pedidos------------
+Pedido = mysql_database.classes.pedidos
+
 class nuevo_pedido(BaseModel):
     SKU: str
     cantidad: int
@@ -29,9 +31,3 @@ class pedidos_filtro(BaseModel):
 
 class aceptar_pedido(BaseModel):
     pedido_id: int
-
-class despacho_filtro(BaseModel):
-    despacho_id: int
-    orden_compra_id: int
-    sku: str
-    fecha: datetime

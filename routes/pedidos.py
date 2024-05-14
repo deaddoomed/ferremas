@@ -3,7 +3,6 @@ from sqlalchemy import or_,update
 from typing import List
 from database import db_dependency
 from models.productos import *
-from models.bodega import *
 from models.ventas import *
 
 router = APIRouter(prefix="/pedidos")
