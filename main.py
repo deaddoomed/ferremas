@@ -1,6 +1,6 @@
 from fastapi import FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
-from routes import productos, pedidos, despachos
+from routes import productos, pedidos, despachos, orden_compra
 from datetime import datetime, timedelta, timezone
 
 app = FastAPI()
@@ -9,7 +9,7 @@ app = FastAPI()
 app.include_router(productos.router)
 app.include_router(pedidos.router)
 app.include_router(despachos.router)
-
+app.include_router(orden_compra.router)
 
 origins = [
     "http://localhost"
