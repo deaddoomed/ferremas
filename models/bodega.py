@@ -12,7 +12,4 @@ class nuevo_despacho(BaseModel):
 
 class despacho_filtro(BaseModel):
     despacho_id: int
-    orden_compra_id: int
     pedido_id: int
-    sku: str
-    fecha: datetime
