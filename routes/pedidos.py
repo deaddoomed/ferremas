@@ -35,14 +35,15 @@ async def busqueda(request: pedidos_filtro, db: db_dependency):
             precio_pedido = producto.precio * pedido.cantidad
 
             if(pedido and producto):  
-                append_to = {   'Orden de Compra': pedido.orden_compra_id,
-                                'Fecha': orden_compra.fecha,
-                                'SKU': pedido.SKU,
-                                'Produto': producto.nombre,
-                                'Cantidad': pedido.cantidad,
-                                'Precio Unitario': producto.precio,
-                                'Precio Total': precio_pedido,
-                                'Estado': pedido.estado
+                append_to = {   'Codigo Pedido': pedido.pedido_id,
+                                'Detalle':{ 'Orden de Compra': pedido.orden_compra_id,
+                                            'Fecha': orden_compra.fecha,
+                                            'SKU': pedido.SKU,
+                                            'Produto': producto.nombre,
+                                            'Cantidad': pedido.cantidad,
+                                            'Precio Unitario': producto.precio,
+                                            'Precio Total': precio_pedido,
+                                            'Estado': pedido.estado}
                             }
                 response.append(append_to)
  
