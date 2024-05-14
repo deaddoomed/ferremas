@@ -39,7 +39,7 @@ async def busqueda(request: productos_filtro, db: db_dependency):
         raise HTTPException(status_code=401, detail='Invalid Request Data: Filter information is invalid')
     
 @router.post("/disponibilidad",status_code=status.HTTP_200_OK)
-async def busqueda(request: productos_filtro, db: db_dependency):
+async def busqueda(request: producto_sku, db: db_dependency):
     if(request):
         producto = db.query(Producto).filter(Producto.SKU == request.sku).first()
 

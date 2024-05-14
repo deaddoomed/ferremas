@@ -13,3 +13,6 @@ class productos_filtro(BaseModel):
     marca: str
     precio_max: int
     precio_min: int
+
+class producto_sku(BaseModel):
+    sku: str
