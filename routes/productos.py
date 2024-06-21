@@ -48,6 +48,6 @@ async def busqueda(request: producto_sku, db: db_dependency):
                         'stock' : producto.stock
                     }
     
-        return response
+        return request
     else:
         raise HTTPException(status_code=401, detail='Invalid Request Data: Filter information is invalid')

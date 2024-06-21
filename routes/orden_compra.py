@@ -25,16 +25,17 @@ async def lista(db: db_dependency):
     productos = db.query(Orden_Compra).all() 
     return productos
     
-@router.put("/metodo_despacho",status_code=status.HTTP_200_OK)
+@router.put("/metodo_despacho",status_code=status.HTTP_200_OK)   
 async def metodo_despacho(request: metodo_despacho, db: db_dependency):
-    statement = (update(Orden_Compra).where(Orden_Compra.orden_compr_id == request.orden_compr_id)).values(metodo_despacho = request.metodo_despacho)
+    statement = (update(Orden_Compra).where(Orden_Compra.orden_compra_id == request.orden_compra_id)).values(metodo_despacho = request.metodo_despacho)
     db.execute(statement)
     db.commit()
     return "Metodo de despacho actualizado"
 
 @router.put("/direccion",status_code=status.HTTP_200_OK)
 async def metodo_despacho(request: direccion_despacho, db: db_dependency):
-    statement = (update(Orden_Compra).where(Orden_Compra.orden_compr_id == request.orden_compr_id)).values(direccion = request.direccion)
+    statement = (update(Orden_Compra).where(Orden_Compra.orden_compra_id == request.orden_compra_id)).values(direccion = request.direccion)
     db.execute(statement)
     db.commit()
-    return "Direccion de despacho actualizada"
+    response = db.query(Orden_Compra).filter(Orden_Compra.orden_compra_id == request.orden_compra_id).first()
+    return response.direccion

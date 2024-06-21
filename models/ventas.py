@@ -30,6 +30,17 @@ class direccion_despacho(BaseModel):
     orden_compra_id: int
     direccion: str
 
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "orden_compra_id": 1,
+                    "direccion": "direcion_actualizada"
+                }
+            ]
+        }
+    }
+
 #------------Pedidos------------
 Pedido = mysql_database.classes.pedidos
 
