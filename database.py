@@ -14,7 +14,7 @@ mysql_url = create_engine(os.getenv('DB_MYSQL'))
 SessionLocal = sessionmaker(autocommit=False, autoflush=False,bind=mysql_url)
 
 mysql_database = automap_base()
-mysql_database.prepare(mysql_url, reflect= True, schema='ferremas')
+mysql_database.prepare(mysql_url, schema='ferremas')
 
 Base = automap_base()
 Base.metadata.create_all(bind=mysql_url)

@@ -16,9 +16,14 @@ async def nueva_orden(request: nueva_orden, db: db_dependency):
         except:
             raise HTTPException(status_code=442, detail='Orden de Compra no pudo ser creada') 
         db.commit()       
-        return "Orden creada!"
+        response = db.query(Orden_Compra).order_by(Orden_Compra.orden_compra_id.desc()).first()
+        return {    "cliente_id": response.cliente_id,
+                    "vendedor_id":response.vendedor_id,
+                    "fecha": response.fecha,
+                    "direccion": response.direccion,
+                    "metodo_despacho": response.metodo_despacho} 
     else:
-        raise HTTPException(status_code=401, detail='No se ingreso orden de compra valida')
+        raise HTTPException(status_code=400, detail='No se ingreso orden de compra valida')
 
 @router.get("/",status_code=status.HTTP_200_OK)
 async def lista(db: db_dependency):
@@ -30,7 +35,8 @@ async def metodo_despacho(request: metodo_despacho, db: db_dependency):
     statement = (update(Orden_Compra).where(Orden_Compra.orden_compra_id == request.orden_compra_id)).values(metodo_despacho = request.metodo_despacho)
     db.execute(statement)
     db.commit()
-    return "Metodo de despacho actualizado"
+    response = db.query(Orden_Compra).filter(Orden_Compra.orden_compra_id == request.orden_compra_id).first()
+    return response.metodo_despacho
 
 @router.put("/direccion",status_code=status.HTTP_200_OK)
 async def metodo_despacho(request: direccion_despacho, db: db_dependency):

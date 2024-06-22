@@ -52,17 +52,17 @@ async def busqueda(request: pedidos_filtro, db: db_dependency):
         raise HTTPException(status_code=401, detail='Invalid Request Data: Filter information is invalid')
     
 @router.put("/aceptar",status_code=status.HTTP_200_OK)
-async def aceptar_pedidos(request: List[aceptar_pedido], db: db_dependency):
-    for pedido in request:
-        statement = (update(Pedido).where(Pedido.pedido_id == pedido.pedido_id)).values(estado = 'aceptado')
-        db.execute(statement)
+async def aceptar_pedidos(request: aceptar_pedido, db: db_dependency):
+    statement = (update(Pedido).where(Pedido.pedido_id == request.pedido_id)).values(estado = 'aceptado')
+    db.execute(statement)
     db.commit()
-    return "Pedidos aceptados"
+    response = db.query(Pedido).filter(Pedido.pedido_id == request.pedido_id).first()
+    return response
 
 @router.put("/rechazar",status_code=status.HTTP_200_OK)
-async def rechazar_pedidos(request: List[aceptar_pedido], db: db_dependency):
-    for pedido in request:
-        statement = (update(Pedido).where(Pedido.pedido_id == pedido.pedido_id)).values(estado = 'rechazado')
-        db.execute(statement)
+async def rechazar_pedidos(request: aceptar_pedido, db: db_dependency):
+    statement = (update(Pedido).where(Pedido.pedido_id == request.pedido_id)).values(estado = 'rechazado')
+    db.execute(statement)
     db.commit()
-    return "Pedidos rechazados"
+    response = db.query(Pedido).filter(Pedido.pedido_id == request.pedido_id).first()
+    return response.estado
