@@ -11,7 +11,7 @@ def test_server_running_exito():
 
 # ORDEN COMPRA /////////////////////////////////////////////////////////////////////
     
-def test_orden_compra_crear_nuevo_dato_valido():
+def test_orden_compra_crear_listar_ordenes():
     response = client.get("/orden_compra/")
     assert response.status_code == 200
 

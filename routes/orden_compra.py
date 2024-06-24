@@ -27,8 +27,8 @@ async def nueva_orden(request: nueva_orden, db: db_dependency):
 
 @router.get("/",status_code=status.HTTP_200_OK)
 async def lista(db: db_dependency):
-    productos = db.query(Orden_Compra).all() 
-    return productos
+    response = db.query(Orden_Compra).all() 
+    return response
     
 @router.put("/metodo_despacho",status_code=status.HTTP_200_OK)   
 async def metodo_despacho(request: metodo_despacho, db: db_dependency):
